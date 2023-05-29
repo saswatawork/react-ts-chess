@@ -1,0 +1,29 @@
+.chess-board__row-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chess-board__row {
+    display: flex;
+}
+
+.chess-board__row-wrapper:nth-child(odd)  .chess-board__item:nth-child(odd)
+{
+    background-color: #769656;
+}
+
+.chess-board__row-wrapper:nth-child(odd)  .chess-board__item:nth-child(even)
+{
+    background-color: #EEEED2;
+}
+
+.chess-board__row-wrapper:nth-child(even) .chess-board__item:nth-child(odd)
+{
+    background-color: #EEEED2;
+}
+
+.chess-board__row-wrapper:nth-child(even) .chess-board__item:nth-child(even)
+{
+    background-color: #769656;
+}
