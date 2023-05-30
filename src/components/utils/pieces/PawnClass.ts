@@ -62,7 +62,10 @@ export class PawnClass {
       this.boardItem,
       this.playerTurn
     );
-    diagonalMove.diagonalDownMove(1);
+    diagonalMove.diagonalDownMove({
+      maxMove: 1,
+      piece: ChessPieces.PAWN,
+    });
     return diagonalMove.board;
   }
 
@@ -82,7 +85,7 @@ export class PawnClass {
       this.boardItem,
       this.playerTurn
     );
-    diagonalMove.diagonalUpMove(1);
+    diagonalMove.diagonalUpMove({ maxMove: 1, piece: ChessPieces.PAWN });
     return diagonalMove.board;
   }
 

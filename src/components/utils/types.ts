@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ChessBoardClass } from "./pieces/ChessBoardClass";
+import { ChessBoardClass } from "./ChessBoardClass";
 
 export interface ChildrenProps {
   children: ReactNode | ReactNode[];
@@ -66,6 +66,11 @@ export interface CreateMoveProps {
   updatedBoard: ChessBoard;
   row: Row;
   col: Col;
+  maxMove: MaxMove;
+  piece?: ChessPieces;
+}
+
+export interface MoveProps {
   maxMove: MaxMove;
   piece?: ChessPieces;
 }

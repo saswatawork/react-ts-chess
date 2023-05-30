@@ -16,7 +16,7 @@ import {
   SelectedBoardItem,
 } from "./utils/types";
 import { ChessReducer, chessInitialState } from "./ChessReducer";
-import { ChessBoardClass } from "./utils/pieces/ChessBoardClass";
+import { ChessBoardClass } from "./utils/ChessBoardClass";
 import { Actions } from "./utils/actions";
 import { getDefaultBoard } from "./utils/getDefaultBoard";
 

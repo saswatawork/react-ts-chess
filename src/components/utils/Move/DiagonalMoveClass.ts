@@ -1,9 +1,10 @@
 import { CONFIG } from "../config";
 import {
   ChessBoard,
+  ChessPieces,
   Col,
   CreateMoveProps,
-  MaxMove,
+  MoveProps,
   Player,
   Row,
   SelectedBoardItem,
@@ -26,32 +27,40 @@ export class DiagonalMoveClass {
     this.col = boardItem.col;
   }
 
-  diagonalUpMove(maxMove: MaxMove) {
-    this.diagonalUpRightMove(maxMove);
-    this.diagonalUpLeftMove(maxMove);
+  diagonalUpMove(move: MoveProps) {
+    this.diagonalUpRightMove(move);
+    this.diagonalUpLeftMove(move);
   }
 
-  diagonalDownMove(maxMove: MaxMove) {
-    this.diagonalDownRightMove(maxMove);
-    this.diagonalDownLeftMove(maxMove);
+  diagonalDownMove(move: MoveProps) {
+    this.diagonalDownRightMove(move);
+    this.diagonalDownLeftMove(move);
   }
 
-  allDiagonalMove(maxMove: MaxMove) {
-    this.diagonalUpRightMove(maxMove);
-    this.diagonalUpLeftMove(maxMove);
-    this.diagonalDownRightMove(maxMove);
-    this.diagonalDownLeftMove(maxMove);
+  allDiagonalMove(move: MoveProps) {
+    this.diagonalUpRightMove(move);
+    this.diagonalUpLeftMove(move);
+    this.diagonalDownRightMove(move);
+    this.diagonalDownLeftMove(move);
   }
 
-  createMove({ updatedBoard, row, col, maxMove }: CreateMoveProps) {
+  createMove({ updatedBoard, row, col, maxMove, piece }: CreateMoveProps) {
     const moveStatus = { valid: false, break: false };
-    if (maxMove) {
+    if (piece) {
       if (
-        maxMove &&
+        piece === ChessPieces.PAWN &&
         updatedBoard[row] &&
         updatedBoard[row][col] &&
         updatedBoard[row][col].player &&
         updatedBoard[row][col].player !== this.playerTurn
+      ) {
+        moveStatus.valid = true;
+      } else if (
+        piece === ChessPieces.KING &&
+        updatedBoard[row] &&
+        updatedBoard[row][col] &&
+        updatedBoard[row][col].player !== this.playerTurn &&
+        updatedBoard[row][col].piece !== ChessPieces.KING
       ) {
         moveStatus.valid = true;
       } else {
@@ -76,14 +85,14 @@ export class DiagonalMoveClass {
     return moveStatus;
   }
 
-  diagonalUpRightMove(maxMove: MaxMove) {
+  diagonalUpRightMove({ maxMove, piece }: MoveProps) {
     const updatedBoard = [...this.board];
     let col = this.col + 1;
     let rowLimit = maxMove ? this.row - maxMove : 0;
     let currentMove;
 
     for (let row = this.row - 1; row >= rowLimit; row--) {
-      currentMove = this.createMove({ updatedBoard, row, col, maxMove });
+      currentMove = this.createMove({ updatedBoard, row, col, maxMove, piece });
       if (currentMove.valid) {
         updatedBoard[row][col].valid = true;
       }
@@ -97,14 +106,14 @@ export class DiagonalMoveClass {
     return updatedBoard;
   }
 
-  diagonalUpLeftMove(maxMove: MaxMove) {
+  diagonalUpLeftMove({ maxMove, piece }: MoveProps) {
     const updatedBoard = [...this.board];
     let col = this.col - 1;
     let rowLimit = maxMove ? this.row - maxMove : 0;
     let currentMove;
 
     for (let row = this.row - 1; row >= rowLimit; row--) {
-      currentMove = this.createMove({ updatedBoard, row, col, maxMove });
+      currentMove = this.createMove({ updatedBoard, row, col, maxMove, piece });
       if (currentMove.valid) {
         updatedBoard[row][col].valid = true;
       }
@@ -118,14 +127,14 @@ export class DiagonalMoveClass {
     return updatedBoard;
   }
 
-  diagonalDownRightMove(maxMove: MaxMove) {
+  diagonalDownRightMove({ maxMove, piece }: MoveProps) {
     const updatedBoard = [...this.board];
     let col = this.col + 1;
     let rowLimit = maxMove ? this.row + maxMove : CONFIG.ROW;
     let currentMove;
 
     for (let row = this.row + 1; row <= rowLimit; row++) {
-      currentMove = this.createMove({ updatedBoard, row, col, maxMove });
+      currentMove = this.createMove({ updatedBoard, row, col, maxMove, piece });
       if (currentMove.valid) {
         updatedBoard[row][col].valid = true;
       }
@@ -138,14 +147,14 @@ export class DiagonalMoveClass {
     return updatedBoard;
   }
 
-  diagonalDownLeftMove(maxMove: MaxMove) {
+  diagonalDownLeftMove({ maxMove, piece }: MoveProps) {
     const updatedBoard = [...this.board];
     let col = this.col - 1;
     let rowLimit = maxMove ? this.row + maxMove : CONFIG.ROW;
     let currentMove;
 
     for (let row = this.row + 1; row <= rowLimit; row++) {
-      currentMove = this.createMove({ updatedBoard, row, col, maxMove });
+      currentMove = this.createMove({ updatedBoard, row, col, maxMove, piece });
       if (currentMove.valid) {
         updatedBoard[row][col].valid = true;
       }

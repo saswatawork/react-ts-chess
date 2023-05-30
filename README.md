@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Chess
 
 Chess game build with React, Typescript
+
+Play [here](https://saswatawork.github.io/react-ts-chess/)
 
 ## Available Scripts
 

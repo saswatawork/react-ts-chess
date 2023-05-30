@@ -32,7 +32,7 @@ export class KingClass {
         this.boardItem,
         this.playerTurn
       );
-      diagonalMove.allDiagonalMove(1);
+      diagonalMove.allDiagonalMove({ maxMove: 1, piece: ChessPieces.KING });
       this.board = diagonalMove.board;
     }
     return this.board;

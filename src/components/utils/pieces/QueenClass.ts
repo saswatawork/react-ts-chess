@@ -32,7 +32,7 @@ export class QueenClass {
         this.boardItem,
         this.playerTurn
       );
-      diagonalMove.allDiagonalMove(null);
+      diagonalMove.allDiagonalMove({ maxMove: null });
       this.board = diagonalMove.board;
     }
     return this.board;

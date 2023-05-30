@@ -4,16 +4,11 @@ import {
   ChessPieces,
   Col,
   CreateMoveProps,
-  MaxMove,
+  MoveProps,
   Player,
   Row,
   SelectedBoardItem,
 } from "../types";
-
-interface MoveProps {
-  maxMove: MaxMove;
-  piece?: ChessPieces;
-}
 
 export class StraightMoveClass {
   board: ChessBoard;
@@ -73,10 +68,10 @@ export class StraightMoveClass {
 
   horiZontalRightMove({ maxMove, piece }: MoveProps) {
     const updatedBoard = [...this.board];
-    let rowLimit = CONFIG.ROW - 1;
+    let colLimit = maxMove ? this.col + maxMove : CONFIG.COL - 1;
     let currentMove;
 
-    for (let col = this.col + 1; col <= rowLimit; col++) {
+    for (let col = this.col + 1; col <= colLimit; col++) {
       currentMove = this.createMove({
         updatedBoard,
         col,
@@ -97,10 +92,10 @@ export class StraightMoveClass {
 
   horiZontalLeftMove({ maxMove, piece }: MoveProps) {
     const updatedBoard = [...this.board];
-    let rowLimit = 0;
+    let colLimit = maxMove ? this.col - maxMove : 0;
     let currentMove;
 
-    for (let col = this.col - 1; col >= rowLimit; col--) {
+    for (let col = this.col - 1; col >= colLimit; col--) {
       currentMove = this.createMove({
         updatedBoard,
         col,

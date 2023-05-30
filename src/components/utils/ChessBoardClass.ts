@@ -4,13 +4,13 @@ import {
   ChessPieces,
   Player,
   SelectedBoardItem,
-} from "../types";
-import { BishopClass } from "./BishopClass";
-import { KingClass } from "./KingClass";
-import { KnightClass } from "./KnightClass";
-import { PawnClass } from "./PawnClass";
-import { QueenClass } from "./QueenClass";
-import { RookClass } from "./RookClass";
+} from "./types";
+import { BishopClass } from "./pieces/BishopClass";
+import { KingClass } from "./pieces/KingClass";
+import { KnightClass } from "./pieces/KnightClass";
+import { PawnClass } from "./pieces/PawnClass";
+import { QueenClass } from "./pieces/QueenClass";
+import { RookClass } from "./pieces/RookClass";
 
 export class ChessBoardClass {
   boardItem: SelectedBoardItem | null;
@@ -180,6 +180,8 @@ export class ChessBoardClass {
     this.board = boardCopy;
     this.activeBoardItem = null;
   }
+
+  isCheckMate() {}
 
   move({ row, col }: BoxItem) {
     const boardCopy = [...this.board];

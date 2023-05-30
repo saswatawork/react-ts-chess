@@ -25,7 +25,7 @@ export class BishopClass {
         this.boardItem,
         this.playerTurn
       );
-      diagonalMove.allDiagonalMove(null);
+      diagonalMove.allDiagonalMove({ maxMove: null });
       this.board = diagonalMove.board;
     }
     return this.board;
